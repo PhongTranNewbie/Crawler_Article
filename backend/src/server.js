@@ -4,10 +4,21 @@ import { sequelize } from './models/index.js';
 import articleRoutes from './routes/articleRoutes.js';
 import './cron/crawlerJob.js';
 import { swaggerUi, swaggerSpec } from './config/swagger.js';
+import cors from 'cors';
 
 dotenv.config();
 
 const app = express();
+
+app.use(
+  cors({
+    origin: "http://localhost:5173", 
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    credentials: true, 
+  })
+);
+
+
 app.use(express.json());
 
 app.get('/', (req, res) => {
